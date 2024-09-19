@@ -17,18 +17,18 @@ namespace WebApplication1
         protected void Button1_Click(object sender, EventArgs e)
         {
             try
-            { 
-            double n1,n2,r;
-            n1 = Double.Parse(num1.Text);
-            n2 = Double.Parse(num2.Text);
-            r = n1 + n2;
-            Label3.Text = r.ToString();
+            {
+                double n1, n2, r;
+                n1 = Double.Parse(num1.Text);
+                n2 = Double.Parse(num2.Text);
+                r = n1*n2/2;
+                n4.Text = r.ToString();
             }
-            catch
+            catch (Exception err)
             {
                 num1.Text = "";
                 num2.Text = "";
-                Label3.Text = "Input Number only";
+                n4.Text = err.ToString();
             }
         }
     }
