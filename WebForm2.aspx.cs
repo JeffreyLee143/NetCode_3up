@@ -17,16 +17,19 @@ namespace WebApplication1
         protected void Button1_Click(object sender, EventArgs e)
         {
             string r = "";
-            int[,] table = new int[int.Parse(TextBox1.Text), int.Parse(TextBox1.Text)];
-            for (int i = 1; i <int.Parse(TextBox1.Text)+1 ; i++){
-                for (int j = 0; j < int.Parse(TextBox1.Text)+1; j++)
-                {
-                    r +=i.ToString()+"*"+j.ToString()+"="+ (i) * (j) + "\t";
-                }
-                r += "<br/>";
+            string a = TextBox1.Text;
+            string[] b = a.Split(',');
+            double[] c = new double[b.Length];
+            for(int i = 1; i <= b.Length; i++)
+            {
+                c[i - 1] = Double.Parse(b[i - 1]);
+            }
+            Array.Sort(c);
+            foreach(double t in c)
+            {
+                r = r + t.ToString() + "<br>";
             }
             Label1.Text = r;
         }
-        
     }
 }

@@ -10,11 +10,15 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:Button ID="Button1" runat="server" Text="抽卡" OnClick="Button1_Click" />
+            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
             <br />
-            抽到: <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
             <br />
-            <asp:Label ID="Label2" runat="server" Text=""></asp:Label>
+            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
         </div>
     </form>
 </body>
