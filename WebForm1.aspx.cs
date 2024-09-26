@@ -16,18 +16,31 @@ namespace WebApplication1
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            Random rnd = new Random();
-            int number = rnd.Next(1, 11);
-            Label1.Text = number.ToString();
-            List<String> s = new List<string>();
-            if (number > 5)
+            string itemID;
+            double[] b = new double[5];
+            double temp;
+            string r = "";
+            for(int i = 1; i <= 5; i++)
             {
-                Label2.Text="克拉拉";
+                TextBox a;
+                itemID = "TextBox" + i;
+                a = (TextBox)Page.FindControl(itemID);
+                b[i - 1] = Double.Parse(a.Text);
             }
-            else
+            for(int i=1; i <= 5; i++)
             {
-                Label2.Text = "瓦爾特";
+                for(int j = i + 1; j <= 5; j++)
+                {
+                    if (b[i - 1] > b[j - 1])
+                    {
+                        temp = b[i - 1];
+                        b[i - 1] = b[j - 1];
+                        b[j - 1] = temp;
+                    }
+                }
+                r = r + b[i - 1].ToString() + "<br>";
             }
+            Label1.Text = r;
         }
     }
 }
