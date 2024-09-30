@@ -16,20 +16,18 @@ namespace WebApplication1
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            try
-            { 
-            double n1,n2,r;
-            n1 = Double.Parse(num1.Text);
-            n2 = Double.Parse(num2.Text);
-            r = n1 + n2;
-            Label3.Text = r.ToString();
+            string r = "";
+            List<Double> a = new List<double>();
+            a.Add(10.3);
+            a.Add(2.3);
+            a.Add(13.3);
+            a.Add(10);
+            Label1.Text = a.Count.ToString();
+            a.Sort();
+            foreach(double b in a){
+                r = r + b + "<br>";
             }
-            catch
-            {
-                num1.Text = "";
-                num2.Text = "";
-                Label3.Text = "Input Number only";
-            }
+            Label2.Text = r;
         }
     }
 }
