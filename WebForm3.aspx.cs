@@ -12,29 +12,16 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            double r = Double.Parse(TextBox1.Text);
-            Circle a = new Circle(r);
-            Label1.Text = a.Area().ToString();
-        }
-
-        protected void Button2_Click(object sender, EventArgs e)
-        {
-            double r = Double.Parse(TextBox1.Text);
-            Circle a = new Circle(r);
-            Label1.Text = a.Circumference().ToString();
-        }
-
-        protected void Button3_Click(object sender, EventArgs e)
-        {
-            double r = Double.Parse(TextBox1.Text);
-            Circle a = new Circle(r);
-            a.Radius = 5;
-            Label1.Text = a.Radius.ToString();
+            Triangle t = new Triangle();
+            t.Base = Double.Parse(TextBox1.Text);
+            t.Height = Double.Parse(TextBox2.Text);
+            Label1.Text = t.Area().ToString();
+            Label2.Text = t.Developer();
         }
     }
 }
