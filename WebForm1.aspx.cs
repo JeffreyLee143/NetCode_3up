@@ -11,25 +11,38 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!this.IsPostBack)
+            {
+                ListItem a = new ListItem();
+                ListItem b = new ListItem();
+                a.Text = "PC1";
+                a.Value = "10000";
+                b.Text = "PC2";
+                b.Value = "20000";
+                DropDownList1.Items.Add(a);
+                DropDownList1.Items.Add(b);
+            }
+        }
+
+        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            try
-            { 
-            double n1,n2,r;
-            n1 = Double.Parse(num1.Text);
-            n2 = Double.Parse(num2.Text);
-            r = n1 + n2;
-            Label3.Text = r.ToString();
-            }
-            catch
+            int count;
+            if (ViewState["counter"] == null)
             {
-                num1.Text = "";
-                num2.Text = "";
-                Label3.Text = "Input Number only";
+                count = 1;
             }
+            else
+            {
+                count = (int)ViewState["counter"] + 1;
+
+            }
+            ViewState["counter"] = count;
+            Label1.Text = count.ToString();
         }
     }
 }

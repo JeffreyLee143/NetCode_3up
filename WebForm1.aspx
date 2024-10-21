@@ -9,17 +9,12 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <h2>Simple Calculator</h2></div>
-        <asp:Label ID="Label1" runat="server" Text="Number 1"></asp:Label>
-        <asp:TextBox ID="num1" runat="server" Width="148px"></asp:TextBox>
+        <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+        </asp:DropDownList>
         <br />
-        <asp:Label ID="Label2" runat="server" Text="Number 2"></asp:Label>
-        <asp:TextBox ID="num2" runat="server" Width="148px"></asp:TextBox>
+        <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
         <br />
-        <asp:Button ID="Button1" runat="server" Text="Calculate" OnClick="Button1_Click" />
-        <br />
-        Result: <asp:Label ID="Label3" runat="server" Text=""></asp:Label>
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
         <br />
     </form>
 </body>
