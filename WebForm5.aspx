@@ -10,8 +10,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
-        </div>
+            Success</div>
     </form>
 </body>
 </html>

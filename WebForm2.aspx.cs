@@ -11,8 +11,14 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Label1.Text = Request.QueryString["n1"];
-            Label2.Text = Request.QueryString["n2"];
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+         
+            Response.Redirect("WebForm1.aspx?name=" + Server.UrlEncode(TextBox1.Text));
+            
         }
     }
 }
