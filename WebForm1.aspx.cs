@@ -13,26 +13,5 @@ namespace WebApplication1
         {
 
         }
-
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-            int sum = 0;
-            string temp;
-            int qty;
-            foreach (GridViewRow i in GridView1.Rows)
-            {
-                temp = ((TextBox)i.Cells[4].FindControl("Textbox2")).Text;
-                if (temp == "")
-                {
-                    qty = 0;
-                }
-                else
-                {
-                    qty = Int32.Parse(temp);
-                }
-                sum = sum + qty * Int32.Parse(i.Cells[3].Text);
-            }
-            Label1.Text = sum.ToString();
-        }
     }
 }
