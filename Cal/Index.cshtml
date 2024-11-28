@@ -1,0 +1,31 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!DOCKTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width"/>
+        <title>Index</title>
+    </head>
+    <body>
+        @using(Html.BeginForm("Add","Cal",FormMethod.Post)){
+            <div>
+                <label for="num1">Numer 1</label>
+                <input type="number" name="num1" id="num1"/>
+            </div>
+        <div>
+            <label for="num2">Numer 2</label>
+            <input type="number" name="num2" id="num2" />
+        </div>
+        <button type="submit">Calculator</button>
+        }
+        @if(ViewBag.Result != null){
+            <div>
+                <h3>Result:</h3>
+            <p>@ViewBag.FirstNum + @ViewBag.SecondNum = @ViewBag.Result</p>
+            </div>
+        }
+    </body>
+</html>
