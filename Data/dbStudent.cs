@@ -4,34 +4,33 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using WebApplication1.Models;
-using Microsoft.Extensions.Configuration;
 namespace WebApplication1.Data
 {
     public class dbStudent
     {
-        private string strcon;
-        public dbStudent(IConfiguration configuration)
+        private string _strcon;
+        public dbStudent(string strcon)
         {
-            strcon = configuration.GetConnectionString("imCS");
+            _strcon = strcon;
         }
-        public List<student> getStudent()
+        public List<Student> GetStudents()
         {
-            List<student> result = new List<student>();
-            using(SqlConnection sqlcon = new SqlConnection(strcon))
+            List<Student> Students = new List<Student>();
+            using(SqlConnection sqlcon = new SqlConnection(_strcon))
             {
                 sqlcon.Open();
                 using(SqlCommand sqlcmd = new SqlCommand())
                 {
                     sqlcmd.Connection = sqlcon;
                     sqlcmd.CommandText = "select id,name from student";
-                    SqlDataReader reader = sqlcmd.ExecuteReader();
-                    while (reader.Read())
+                    SqlDataReader sqldr = sqlcmd.ExecuteReader();
+                    while (sqldr.Read())
                     {
-                        result.Add(new student() {id=reader.GetInt32(0) ,Name=reader.GetString(1)});
+                        Students.Add(new Student() { Id = sqldr.GetInt32(0), Name = sqldr.GetString(1) });
                     }
                 }
             }
-            return result;
+            return Students;
         }
     }
 }
