@@ -10,11 +10,15 @@ namespace WebApplication1.Controllers
 {
     public class StudentController : Controller
     {
+        private dbStudent _db;
+        public StudentController(dbStudent db)
+        {
+            _db = db;
+        }
         public IActionResult Index()
         {
-            dbStudent db = new dbStudent();
-            var sdata = db.getStudent();
-            return View(sdata);
+            var ss = _db.GetStudents();
+            return View(ss);
         }
     }
 }
