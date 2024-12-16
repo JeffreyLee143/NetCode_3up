@@ -10,12 +10,17 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            name:<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-            <br />
-            age:<asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
-            <br />
-            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
-        </div>
+            <h2>Simple Calculator</h2></div>
+        <asp:Label ID="Label1" runat="server" Text="Number 1"></asp:Label>
+        <asp:TextBox ID="num1" runat="server" Width="148px"></asp:TextBox>
+        <br />
+        <asp:Label ID="Label2" runat="server" Text="Number 2"></asp:Label>
+        <asp:TextBox ID="num2" runat="server" Width="148px"></asp:TextBox>
+        <br />
+        <asp:Button ID="Button1" runat="server" Text="Calculate" OnClick="Button1_Click" />
+        <br />
+        Result: <asp:Label ID="Label3" runat="server" Text=""></asp:Label>
+        <br />
     </form>
 </body>
 </html>
