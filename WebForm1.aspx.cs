@@ -9,22 +9,17 @@ namespace WebApplication1
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
-        private int cnt;
         protected void Page_Load(object sender, EventArgs e)
         {
-            Application.Lock();
-            if (Application["count"] != null)
-            {
-                cnt = (int)Application["count"];
-            }
-            else
-            {
-                cnt = 0;
-            }
-            cnt = cnt + 1;
-            Application["count"] = cnt;
-            Application.UnLock();
-            Label1.Text = cnt.ToString();
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            string n = TextBox1.Text;
+            string a = TextBox2.Text;
+            // Response.Redirect("WebForm2.aspx?n1=" + Server.UrlEncode(n) + "&n2=" + Server.UrlEncode(a));
+            Server.Transfer("WebForm2.aspx?n1=" + Server.UrlEncode(n) + "&n2=" + Server.UrlEncode(a));
         }
     }
 }
