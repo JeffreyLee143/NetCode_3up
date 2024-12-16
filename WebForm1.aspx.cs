@@ -16,10 +16,20 @@ namespace WebApplication1
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            string n = TextBox1.Text;
-            string a = TextBox2.Text;
-            // Response.Redirect("WebForm2.aspx?n1=" + Server.UrlEncode(n) + "&n2=" + Server.UrlEncode(a));
-            Server.Transfer("WebForm2.aspx?n1=" + Server.UrlEncode(n) + "&n2=" + Server.UrlEncode(a));
+            try
+            { 
+            double n1,n2,r;
+            n1 = Double.Parse(num1.Text);
+            n2 = Double.Parse(num2.Text);
+            r = n1 + n2;
+            Label3.Text = r.ToString();
+            }
+            catch
+            {
+                num1.Text = "";
+                num2.Text = "";
+                Label3.Text = "Input Number only";
+            }
         }
     }
 }
