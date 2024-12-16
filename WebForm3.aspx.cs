@@ -11,7 +11,13 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Label1.Text = Request.QueryString["name"];
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Session["myID"] = TextBox1.Text;
+            Response.Redirect("WebForm4.aspx");
         }
     }
 }

@@ -10,11 +10,9 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            Account:
-            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
             <br />
-            Passwoed:
-            <asp:TextBox ID="TextBox2" runat="server" TextMode="Password"></asp:TextBox>
+            <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
             <br />
             <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
         </div>
