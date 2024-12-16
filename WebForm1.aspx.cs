@@ -4,37 +4,27 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.SqlClient;
 
 namespace WebApplication1
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
+        private int cnt;
         protected void Page_Load(object sender, EventArgs e)
         {
-
-        }
-
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-            string strcon = @"Data Source=(localdb)\mssqllocaldb;Initial Catalog=im;Integrated Security=True;Pooling=False";
-            SqlConnection sqlcon = new SqlConnection(strcon);
-            sqlcon.Open();
-            SqlCommand sqlcmd = new SqlCommand();
-            sqlcmd.Connection = sqlcon;
-            sqlcmd.CommandText = "select Account, Password from UserAccount where Account='@acc";
-            sqlcmd.Parameters.AddWithValue("@acc",TextBox1.Text);
-            SqlDataReader sqldr = sqlcmd.ExecuteReader();
-            if (sqldr.Read())
+            Application.Lock();
+            if (Application["count"] != null)
             {
-                if (sqldr.GetString(1).Equals(TextBox2.Text))
-                {
-                    Response.Redirect("WebForm2.aspx");
-                }
-               
+                cnt = (int)Application["count"];
             }
-            sqlcon.Close();
+            else
+            {
+                cnt = 0;
+            }
+            cnt = cnt + 1;
+            Application["count"] = cnt;
+            Application.UnLock();
+            Label1.Text = cnt.ToString();
         }
     }
 }
