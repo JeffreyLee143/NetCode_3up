@@ -13,10 +13,5 @@ namespace WebApplication1
         {
 
         }
-
-        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
