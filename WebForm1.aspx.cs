@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace WebApplication1
 {
@@ -16,23 +18,23 @@ namespace WebApplication1
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            int sum = 0;
-            string temp;
-            int qty;
-            foreach (GridViewRow i in GridView1.Rows)
+            string strcon = @"Data Source=(localdb)\mssqllocaldb;Initial Catalog=im;Integrated Security=True;Pooling=False";
+            SqlConnection sqlcon = new SqlConnection(strcon);
+            sqlcon.Open();
+            SqlCommand sqlcmd = new SqlCommand();
+            sqlcmd.Connection = sqlcon;
+            sqlcmd.CommandText = "select Account, Password from UserAccount where Account='@acc";
+            sqlcmd.Parameters.AddWithValue("@acc",TextBox1.Text);
+            SqlDataReader sqldr = sqlcmd.ExecuteReader();
+            if (sqldr.Read())
             {
-                temp = ((TextBox)i.Cells[4].FindControl("Textbox2")).Text;
-                if (temp == "")
+                if (sqldr.GetString(1).Equals(TextBox2.Text))
                 {
-                    qty = 0;
+                    Response.Redirect("WebForm2.aspx");
                 }
-                else
-                {
-                    qty = Int32.Parse(temp);
-                }
-                sum = sum + qty * Int32.Parse(i.Cells[3].Text);
+               
             }
-            Label1.Text = sum.ToString();
+            sqlcon.Close();
         }
     }
 }
