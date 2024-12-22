@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,51 +10,28 @@ using MVC_HW.Models;
 
 namespace MVC_HW.Controllers
 {
-    public class TasksController : Controller
+    public class TaskController : Controller
     {
         private readonly TaskContext _context;
 
-        public TasksController(TaskContext context)
+        public TaskController(TaskContext context)
         {
             _context = context;
         }
 
-        // GET: Tasks
         public async Task<IActionResult> Index()
         {
             return View(await _context.Task.ToListAsync());
         }
 
-        // GET: Tasks/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var task = await _context.Task
-                .FirstOrDefaultAsync(m => m.TaskId == id);
-            if (task == null)
-            {
-                return NotFound();
-            }
-
-            return View(task);
-        }
-
-        // GET: Tasks/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Tasks/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TaskId,Title,Description,Budget,DueDate")] Task task)
+        public async Task<IActionResult> Create([Bind("TaskId,Title,Description,Budget,DueDate")] Models.Task task)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +42,6 @@ namespace MVC_HW.Controllers
             return View(task);
         }
 
-        // GET: Tasks/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,12 +57,9 @@ namespace MVC_HW.Controllers
             return View(task);
         }
 
-        // POST: Tasks/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TaskId,Title,Description,Budget,DueDate")] Task task)
+        public async Task<IActionResult> Edit(int id, [Bind("TaskId,Title,Description,Budget,DueDate")] Models.Task task)
         {
             if (id != task.TaskId)
             {
@@ -116,7 +89,23 @@ namespace MVC_HW.Controllers
             return View(task);
         }
 
-        // GET: Tasks/Delete/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var task = await _context.Task
+                .FirstOrDefaultAsync(m => m.TaskId == id);
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            return View(task);
+        }
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,7 +123,6 @@ namespace MVC_HW.Controllers
             return View(task);
         }
 
-        // POST: Tasks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -147,6 +135,26 @@ namespace MVC_HW.Controllers
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+        
+        public async Task<IActionResult> Search()
+        {
+            return View(await _context.Task.ToListAsync());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Search(int Min_Budget, int Max_Budget)
+        {
+            if(Min_Budget> Max_Budget)
+            {
+                var Search_Task = await _context.Task.Where(m => m.Budget.CompareTo(Max_Budget) >= 0 && m.Budget.CompareTo(Min_Budget) <= 0).ToListAsync();
+                return View(Search_Task);
+            }
+            else
+            {
+                var Search_Task = await _context.Task.Where(m => m.Budget.CompareTo(Min_Budget) >= 0 && m.Budget.CompareTo(Max_Budget) <= 0).ToListAsync();
+                return View(Search_Task);
+            }
         }
 
         private bool TaskExists(int id)
