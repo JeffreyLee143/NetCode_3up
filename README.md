@@ -194,21 +194,15 @@ public async Task<IActionResult> Search() // 搜尋功能
 4. 回到TaskController.cs剛剛Search的地方下面打上
 ```
 [HttpPost]
-public async Task<IActionResult> Search(int minBudget, int maxBudget)
-{
-    var Task = await _context.Task.Where(m => m.Budget.CompareTo(minBudget) >= 0 && m.Budget.CompareTo(maxBudget) <= 0).ToListAsync();
-    return View(Task);
-}
-```
-[HttpPost]
 public async Task<IActionResult> Search(int Min_Budget, int Max_Budget)
 {
     var Search_Task = await _context.Task.Where(m => m.Budget.CompareTo(Min_Budget) >= 0 && m.Budget.CompareTo(Max_Budget) <= 0).ToListAsync();
     return View(Search_Task);
 }
+```
 # 上方工具欄建立連結(Index/Create/Search)
 1. 打開YourProject/Views/Shared/_Layout.cshtml
-2. 找到<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">把裡面改成下面這樣
+2. 找到```<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">```把裡面改成下面這樣
 ```
 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
     <ul class="navbar-nav flex-grow-1">
