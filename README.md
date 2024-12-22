@@ -1,4 +1,5 @@
 # NetCode_3up
+411630014
 For Network Programming 113_1
 # 環境建置
 1. 伺服器總管->資料連接->建立新的sql server資料庫->(localdb)\mssqllocaldb
