@@ -5,6 +5,8 @@ For Network Programming 113_1
 1. 伺服器總管->資料連接->建立新的sql server資料庫->(localdb)\mssqllocaldb
 2. 建立專案(ASP.Net Core Web應用程式(MVC架構), https關掉)
 3. 工具->NuGet套件管理員->管理方案的NuGet套件->瀏覽->安裝Microsoft.EntityFrameworkCore, Microsoft.EntityFrameworkCore.SqlServer.
+    * Visual Studio 2017: 裝2.1.1版
+    * Visual Studio 2017: 裝最新版(9.0.0或LTS)
 # 建立資料庫: 
 使用 MS SQL Express Localdb 建立一個名為 Task 的資料表，其中包含四個欄位:
 TaskId (int)，Title (varchar(20))，Description (varchar(50))，Budget (int)，DueDate
@@ -122,6 +124,7 @@ services.AddDbContext<TastContext>(options=>options.UseSqlServer(Configuration.G
 * 檢視下面選項全勾
 * 控制器名稱TaskController
 2. 新增，失敗往上看步驟有沒有都對
+* 可能會遇到Task撞名報錯,Task改成Models.Task
 ## 建立Search功能
 1. 在TaskController.cs裡面新增一個Function: Search, 用非同步方式
 ```
@@ -194,10 +197,10 @@ public async Task<IActionResult> Search() // 搜尋功能
 4. 回到TaskController.cs剛剛Search的地方下面打上
 ```
 [HttpPost]
-public async Task<IActionResult> Search(int Min_Budget, int Max_Budget)
+public async Task<IActionResult> Search(int minBudget, int maxBudget)
 {
-    var Search_Task = await _context.Task.Where(m => m.Budget.CompareTo(Min_Budget) >= 0 && m.Budget.CompareTo(Max_Budget) <= 0).ToListAsync();
-    return View(Search_Task);
+    var Task = await _context.Task.Where(m => m.Budget.CompareTo(minBudget) >= 0 && m.Budget.CompareTo(maxBudget) <= 0).ToListAsync();
+    return View(Task);
 }
 ```
 # 上方工具欄建立連結(Index/Create/Search)
