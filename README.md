@@ -74,6 +74,7 @@ Search (POST) : 顯示具符合預算範圍的任務。
 ## How
 ### 編輯appsettings.json
 第八行是要加入的資料,用於連線資料庫的連線字串, 其中的Encrypt=True要改成False
+"mygoConnectionStrings"後面的東西要去資料連接看屬性中連接字串複製貼上
 ```
 {
   "Logging": {
@@ -94,7 +95,7 @@ using Microsoft.EntityFrameworkCore;
 ```
 並在"builder.Services.AddControllersWithViews();"下面加入這段代碼
 ```
-builder.Services.AddDbContext<TaskContext>(options=>options.UseSqlServer("mygoConnectionStrings")); //用於將資料庫上下文 (DbContext) 與 SQL Server 連接起來
+builder.Services.AddDbContext<TaskContext>(options=>options.UseSqlServer(builder.Configuration.GetConnectionString("mygoConnectionStrings"))); //用於將資料庫上下文 (DbContext) 與 SQL Server 連接起來
 ```
 所以開頭看起來會像這樣
 ```
@@ -104,7 +105,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<TaskContext>(options=>options.UseSqlServer("mygoConnectionStrings"));
+builder.Services.AddDbContext<TaskContext>(options=>options.UseSqlServer(builder.Configuration.GetConnectionString("mygoConnectionStrings")));
 var app = builder.Build();
 ```
 ### VS 2017版本: StartUp.cs
