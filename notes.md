@@ -159,7 +159,7 @@ Name: <input type="text" id="Name" name="Name" />
       <button type="submit">Search</button>
 </form>
 </div>
-@if(Model is not null){
+@if(Model != null){
     <table class="table">
         <thead>
             <tr>
